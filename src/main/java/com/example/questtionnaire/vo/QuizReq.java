@@ -14,5 +14,4 @@ public class QuizReq extends QuizVo{
 	public QuizReq(Questionnaire questionnaire, List<Question> questionList) {
 		super(questionnaire, questionList);
 	}
-
 }
