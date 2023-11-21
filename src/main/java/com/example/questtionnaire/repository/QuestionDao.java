@@ -11,11 +11,11 @@ public interface QuestionDao extends JpaRepository<Question,QuestionId>{
 	
 	public void deleteAllByQnIdIn(List<Integer> qnIdList);
 	
-	public void deleteAllByQnIdAndQuIdIn(List<Integer> qnIdList);
+	public void deleteAllByQnIdInAndQuIdIn(List<Integer> qnIdList,List<Integer> quIdList);
 	
 	public List<Question> findByQnIdInAndQnId(List<Integer> idList, int qnId);
 	
-	public List<Question> findAllByQnIdIn();
+//	public List<Question> findAllByQnIdIn();
 
 	public List<Question> findAllByQnIdIn(List<Integer> qnIds);
 }

@@ -3,15 +3,18 @@ package com.example.questtionnaire.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name="question")
+@IdClass(value = QuestionId.class)
 public class Question {
 	
 	@Id
 	@Column(name = "id")
-	private int quid;
+	private int quId;
 	
 	@Id
 	@Column(name = "qn_id")
@@ -43,11 +46,11 @@ public class Question {
 	}
 
 	public int getQuId() {
-		return quid;
+		return quId;
 	}
 
 	public void setQuId(int id) {
-		this.quid = id;
+		this.quId = id;
 	}
 
 	public int getQnId() {

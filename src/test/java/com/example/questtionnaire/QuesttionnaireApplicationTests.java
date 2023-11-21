@@ -26,13 +26,13 @@ class QuesttionnaireApplicationTests {
         this.qnDao = qnDao;
     }
 	
-	@Test
-	public void test() {
-		LocalDate start = LocalDate.now();
-		LocalDate end = LocalDate.of(2023, 11, 31);
-		List<Questionnaire> res = quDao.findByTitleAndStartDateGreaterThanEqualAndEndDateLessThanEqual("AAA", start,
-				end);
-		
-	}
+//	@Test
+//	public void test() {
+//		LocalDate start = LocalDate.now();
+//		LocalDate end = LocalDate.of(2023, 11, 31);
+//		List<Questionnaire> res = quDao.findByTitleAndStartDateGreaterThanEqualAndEndDateLessThanEqual("AAA", start,
+//				end);
+//		
+//	}
 
 }

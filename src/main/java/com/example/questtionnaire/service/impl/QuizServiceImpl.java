@@ -127,7 +127,7 @@ public class QuizServiceImpl implements QuizService {
 			}
 		}
 		if (!idList.isEmpty()) {
-			qnDao.deleteAllById(idList);
+			qnDao.deleteAllByIdIn(idList);
 			quDao.deleteAllByQnIdIn(idList);
 		}
 		return new QuizRes(RtnCode.SUCCESSFUL);
@@ -160,7 +160,7 @@ public class QuizServiceImpl implements QuizService {
 //		if (endDate == null) {
 //			endDate = LocalDate.of(2099, 12, 31);
 //		}ÁY´î«á¦p¤W
-		List<Questionnaire> qnList = qnDao.findByTitleAndStartDateGreaterThanEqualAndEndDateLessThanEqual(title,
+		List<Questionnaire> qnList = qnDao.findByTitleContainingAndStartDateGreaterThanEqualAndEndDateLessThanEqual(title,
 				startDate, endDate);
 		List<Integer> qnIds = new ArrayList<>();
 		for (Questionnaire qu : qnList) {

@@ -1,27 +1,29 @@
 package com.example.questtionnaire.entity;
 
-public class QuestionId {
+import java.io.Serializable;
 
-	private int quid;
+public class QuestionId implements Serializable{
+
+	private int quId;
 	
 	private int qnId;
 
-	public int getQuid() {
-		return quid;
+	public int getQuId() {
+		return quId;
 	}
 
 	public QuestionId() {
 		super();
 	}
 
-	public QuestionId(int quid, int qnId) {
+	public QuestionId(int quId, int qnId) {
 		super();
-		this.quid = quid;
+		this.quId = quId;
 		this.qnId = qnId;
 	}
 
 	public void setQuid(int quid) {
-		this.quid = quid;
+		this.quId = quId;
 	}
 
 	public int getQnId() {

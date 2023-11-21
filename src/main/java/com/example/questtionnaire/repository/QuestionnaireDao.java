@@ -21,12 +21,12 @@ public interface QuestionnaireDao extends JpaRepository<Questionnaire,Question>{
 	
 	public List<Questionnaire> findByIdIn(List<Integer> idList);
 	
-	public List<Questionnaire> findByIdAndPublishedFalse(List<Integer> idList);
+	public List<Questionnaire> findByIdInAndPublishedFalse(List<Integer> idList);
 	
-	public void deleteAllById(List<Integer> idList);
+	public void deleteAllByIdIn(List<Integer> idList);
 	
-	public List<Questionnaire> findByTitleAndStartDateGreaterThanEqualAndEndDateLessThanEqual(String title,LocalDate startDate,LocalDate endDate);
+	public List<Questionnaire> findByTitleContainingAndStartDateGreaterThanEqualAndEndDateLessThanEqual(String title,LocalDate startDate,LocalDate endDate);
 
-	public List<Questionnaire> findByTitleAndStartDateGreaterThanEqual(String title, LocalDate startDate,
-			LocalDate endDate); 
+//	public List<Questionnaire> findByTitleAndStartDateGreaterThanEqualAndE(String title, LocalDate startDate,
+//			LocalDate endDate); 
 }
