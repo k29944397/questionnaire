@@ -12,8 +12,34 @@ public class QuizRes {
 	
 	private RtnCode retCode;
 
-	public QuizRes(List<QuizVo> quizVoList2, RtnCode successful) {
+	private List<QnQuVo> quQnVoList;
+	
+	public List<QnQuVo> getQuQnVoList() {
+		return quQnVoList;
+	}
+	public void setQuQnVoList(List<QnQuVo> quQnVoList) {
+		this.quQnVoList = quQnVoList;
+	}
+	public QuizRes(List<QuizVo> quizVoList, List<QnQuVo> quQnVoList, RtnCode retCode) {
 		super();
+		this.quizVoList = quizVoList;
+		this.retCode = retCode;
+		this.quQnVoList = quQnVoList;
+	}
+	public QuizRes() {
+		super();
+	}
+	public QuizRes(List<QuizVo> quizVoList, RtnCode retCode) {
+		super();
+		this.quizVoList = quizVoList;
+		this.retCode = retCode;
+	}
+	public List<QuizVo> getQuizVoList() {
+		return quizVoList;
+	}
+
+	public void setQuizVoList(List<QuizVo> quizVoList) {
+		this.quizVoList = quizVoList;
 	}
 
 	public QuizRes(RtnCode retCode) {
@@ -28,5 +54,4 @@ public class QuizRes {
 	public void setRetCode(RtnCode retCode) {
 		this.retCode = retCode;
 	}
-
 }

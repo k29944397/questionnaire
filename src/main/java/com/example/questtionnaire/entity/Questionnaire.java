@@ -18,13 +18,16 @@ public class Questionnaire {
 	@Column(name = "id")
 	private int id;
 	
+	@Column(name="uuid")
+	private int uuid;
+	
 	@Column(name = "title")
 	private String title;
 	
 	@Column(name = "description")
 	private String description;
 	
-	@Column(name = "published")
+	@Column(name = "is_published")
 	private boolean published;
 
 	@Column(name = "start_Date")
@@ -38,8 +41,10 @@ public class Questionnaire {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Questionnaire(String title, String description, boolean published, LocalDate startDate, LocalDate endDate) {
+	public Questionnaire(int id,String title, String description, boolean published, LocalDate startDate,
+			LocalDate endDate) {
 		super();
+		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.published = published;
@@ -53,6 +58,14 @@ public class Questionnaire {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(int uuid) {
+		this.uuid = uuid;
 	}
 
 	public String getTitle() {
@@ -94,5 +107,4 @@ public class Questionnaire {
 	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
-	
 }

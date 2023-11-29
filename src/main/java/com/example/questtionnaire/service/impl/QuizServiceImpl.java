@@ -18,6 +18,7 @@ import com.example.questtionnaire.entity.Questionnaire;
 import com.example.questtionnaire.repository.QuestionDao;
 import com.example.questtionnaire.repository.QuestionnaireDao;
 import com.example.questtionnaire.service.ifs.QuizService;
+import com.example.questtionnaire.vo.QnQuVo;
 import com.example.questtionnaire.vo.QuestionRes;
 import com.example.questtionnaire.vo.QuestionnaireRes;
 import com.example.questtionnaire.vo.QuizReq;
@@ -40,40 +41,39 @@ public class QuizServiceImpl implements QuizService {
 		if (checkResult != null) {
 			return checkResult;
 		}
-		int quId = qnDao.save(req.getQuestionnaire()).getId();
+		qnDao.save(req.getQuestionnaire());
+		int quId = req.getQuestionnaire().getId();
 		List<Question> quList = req.getQuestionList();
 		if (quList.isEmpty()) {
 			return new QuizRes(RtnCode.SUCCESSFUL);
 		}
-//		int quId = qnDao.findTopByOrderByIdDesc().getId();
 		for (Question qu : quList) {
 			qu.setQnId(quId);
 		}
 		quDao.saveAll(quList);
+		System.out.println(req.getQuestionnaire().getStartDate());
 		return new QuizRes(RtnCode.SUCCESSFUL);
 	}
 
-	@Override
 	public QuizRes checkParam(QuizReq req) {
 		Questionnaire qn = req.getQuestionnaire();
-//		if(qn == null) {
-//			return new QuizRes(RtnCode.QUESTIONNAIRE_PARAM_ERROR);
-//		}
+		
 		if (!StringUtils.hasText(qn.getTitle()) || !StringUtils.hasText(qn.getDescription())
 				|| qn.getStartDate() == null || qn.getEndDate() == null
-				|| (!qn.getStartDate().isEqual(qn.getEndDate())) && qn.getStartDate().isAfter(qn.getEndDate())) {
+				|| (!qn.getStartDate().isEqual(qn.getEndDate())) && qn.getStartDate().isAfter(qn.getEndDate())
+				) {
 			return new QuizRes(RtnCode.QUESTIONNAIRE_PARAM_ERROR);
 		}
 		List<Question> quList = req.getQuestionList();
-		for (Question qu : quList) {
-			if (qu.getQuId() <= 0 || !StringUtils.hasText(qu.getqTitle()) || !StringUtils.hasText(qu.getOptionType())
-					|| !StringUtils.hasText(qu.getOption())) {
-				return new QuizRes(RtnCode.QUESTION_PARAM_ERROR);
-			}
-		}
+//		for (Question qu : quList) {
+//			if (qu.getQuId() <= 0 || !StringUtils.hasText(qu.getqTitle()) || !StringUtils.hasText(qu.getOptionType())
+//					|| !StringUtils.hasText(qu.getOption())) {
+//				return new QuizRes(RtnCode.QUESTION_PARAM_ERROR);
+//			}
+//		}¨¾§bÃa±¼
 		return null;
 	}
-
+	
 	@Override
 	public QuizRes update(QuizReq req) {
 		QuizRes checkResult = checkParam(req);
@@ -135,31 +135,23 @@ public class QuizServiceImpl implements QuizService {
 
 	@Override
 	public QuizRes deleteQuest(int qnId, List<Integer> quIdList) {
-		Optional<Questionnaire> qnOp = qnDao.findById(qnId);
-		if (qnOp.isEmpty()) {
-			return new QuizRes(RtnCode.SUCCESSFUL);
-		}
-		Questionnaire qn = qnOp.get();
-		if (!qn.isPublished() || qn.isPublished() && LocalDate.now().isBefore(qn.getStartDate())) {
-			quDao.deleteAllByQnIdIn(quIdList);
-		}
+//		Optional<Questionnaire> qnOp = qnDao.findById(qnId);
+//		if (qnOp.isEmpty()) {
+//			return new QuizRes(RtnCode.SUCCESSFUL);
+//		}
+//		Questionnaire qn = qnOp.get();
+//		if (!qn.isPublished() || qn.isPublished() && LocalDate.now().isBefore(qn.getStartDate())) {
+//			quDao.deleteAllByQnIdIn(quIdList);
+//		}
 		return new QuizRes(RtnCode.SUCCESSFUL);
 	}
-
+//	@Cacheable(cacheNames = "search",
+//			//title_startDate_endDate
+////			key = "test_2023-11-10_2023-11-31"
+//			key="#title.concat('_').concat(#startDate.toString()).concat('_').concat(#endDate.toString())",
+//			unless = "#result.rtnCode.code !=200")
 	@Override
 	public QuizRes search(String title, LocalDate startDate, LocalDate endDate) {
-		title = StringUtils.hasText(title) ? title : "";
-		startDate = startDate != null ? startDate : LocalDate.of(1971, 1, 1);
-		endDate = endDate != null ? endDate : LocalDate.of(2099, 12, 31);
-//		if (!StringUtils.hasText(title)) {
-//			title = "";
-//		}
-//		if (startDate == null) {
-//			startDate = LocalDate.of(1971, 1, 1);
-//		}
-//		if (endDate == null) {
-//			endDate = LocalDate.of(2099, 12, 31);
-//		}ÁY´î«á¦p¤W
 		List<Questionnaire> qnList = qnDao.findByTitleContainingAndStartDateGreaterThanEqualAndEndDateLessThanEqual(title,
 				startDate, endDate);
 		List<Integer> qnIds = new ArrayList<>();
@@ -207,5 +199,10 @@ public class QuizServiceImpl implements QuizService {
 		List<Question> quList = quDao.findAllByQnIdIn(Arrays.asList(qnId));
 //		return new QuestionRes(quList, RtnCode.SUCCESSFUL);
 		return null;
+	}
+	@Override
+	public QuizRes searchFuzzy(String title,LocalDate startDate, LocalDate endDate) {
+		List<QnQuVo> res = null;
+		return new QuizRes(null, res, RtnCode.SUCCESSFUL);
 	}
 }

@@ -1,13 +1,13 @@
-CREATE TABLE IF NOT EXISTS `questtionnaire`.`user` (
-  `name` VARCHAR(20) NULL DEFAULT NULL,
-  `phone_number` VARCHAR(45) NOT NULL,
-  `email` VARCHAR(20) NULL DEFAULT NULL,
-  `age` INT NULL DEFAULT 0,
-  `q_id` INT NOT NULL,
-  `qn_id` INT NOT NULL,
-  `ans` VARCHAR(60) NULL DEFAULT NULL,
-  PRIMARY KEY (`phone_number`),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+CREATE TABLE IF EXISTS `questionnaire` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(45) NOT NULL,
+  `title` varchar(60) DEFAULT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `is_published` tinyint DEFAULT '0',
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  PRIMARY KEY (`id`,`uuid`)
+) 
+ENGINE=InnoDB AUTO_INCREMENT=2 
+DEFAULT CHARSET=utf8mb4 
+COLLATE=utf8mb4_0900_ai_ci;

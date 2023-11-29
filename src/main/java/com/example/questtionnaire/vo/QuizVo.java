@@ -17,7 +17,7 @@ public class QuizVo {
 		super();
 	}
 
-	public QuizVo(Questionnaire questionnaire2, List<Question> questionList) {
+	public QuizVo(Questionnaire questionnaire, List<Question> questionList) {
 		super();
 		this.questionnaire = questionnaire;
 		this.questionList = questionList;
@@ -30,7 +30,7 @@ public class QuizVo {
 	public void setQuestionnaire(Questionnaire questionnaire) {
 		this.questionnaire = questionnaire;
 	}
-
+ 
 	public void setQuestionnaireList(List<Questionnaire> questionnaireList) {
 		this.questionnaire = questionnaire;
 	}
